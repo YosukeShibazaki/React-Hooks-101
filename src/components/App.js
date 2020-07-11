@@ -1,7 +1,22 @@
-import React,{useState} from 'react';
+import React,{useState, useReducer} from 'react';
+import reducer from '../reducers'; // jsファイルまで指定しなくてもimportができる
 //import './App.css';
 
 const App = () => {
+  const [state,dispatch] = useReducer(reducer,[]); // reducerの定義する。dispatchにはactionのtypeを渡す。useReducerの第一引数にはimportしたreducerを、第二引数にはstateの初期値を渡す。
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
+
+  const addEvent = (e) => {
+    e.preventDefault();
+    dispatch({
+      type:'CREATE_EVENT',
+      title,
+      body
+    });
+    console.log(state);
+  }
+
   return (
     <> {/* React.Fragmentの略 */}
       <div className="container-fluid">
@@ -9,15 +24,15 @@ const App = () => {
         <form>
           <div className="from-group">
             <label htmlFor="formEventTitle">タイトル</label>
-            <input className="form-control" id="formEventTitle" />
+            <input className="form-control" id="formEventTitle" value={title} onChange={e => {setTitle(e.target.value)}} />
           </div>
 
           <div className="from-group">
             <label htmlFor="formEventBody">ボディ</label>
-            <textarea className="form-control" id="formEventBody" />
+            <textarea className="form-control" id="formEventBody" onChange={e => {setBody(e.target.value)}} />
           </div>
 
-          <button className="btn btn-primary">イベントを作成する</button>
+          <button className="btn btn-primary" value={body} onClick={(e)=>{addEvent(e)}}>イベントを作成する</button>
           <button className="btn btn-danger">全てのイベントを削除する</button>
         </form>
 
