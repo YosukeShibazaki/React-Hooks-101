@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect,useState} from 'react';
 //import './App.css';
 
 const App = (props) => { // initialStatesが外部から与えられるものならば、引数にpropsを宣言
@@ -7,6 +7,18 @@ const App = (props) => { // initialStatesが外部から与えられるものな
   //const [name,setName] = useState(props.name);
   //const [price,setPrice] = useState(props.price);
   const {name,price} = state; // stateオブジェクトの中身を変数nameとpriceにそれぞれ代入
+
+  useEffect(()=>{ // useEffectはレンダリングの後に実行がされる。(componentDidMount or componentDidUpdateに近い)
+    console.log('useEffectが処理されました');
+  });
+
+  useEffect(()=>{ // useEffectは何度でも使えるよ
+    console.log('This is like componentDidMount.');
+  },[]); // 空の配列を第二引数に渡すことで、componentDidMountのように使える。(画面の最初の読み込み時のみ実行される)
+
+  useEffect(()=>{
+    console.log('This callback is for name only.');
+  },[name]); //配列の中に値を入れる、その値のstateが更新された時に実行されるようになる。
 
   return (
     <> {/* React.Fragmentの略 */}
