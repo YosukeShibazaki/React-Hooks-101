@@ -9,16 +9,19 @@ const App = () => {
 
   const addEvent = e => {
     e.preventDefault();
-
     dispatch({
       type:'CREATE_EVENT',
       title,
       body
     });
+
+    // イベントを作成した後の入力フォームの値を空にしています。
     setTitle('');
     setBody('');
-    console.log(state);
+    console.log({state});
   }
+
+
 
   return (
     <> {/* React.Fragmentの略 */}
