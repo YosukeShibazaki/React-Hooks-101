@@ -7,13 +7,16 @@ const App = () => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const addEvent = (e) => {
+  const addEvent = e => {
     e.preventDefault();
+
     dispatch({
       type:'CREATE_EVENT',
       title,
       body
     });
+    setTitle('');
+    setBody('');
     console.log(state);
   }
 
@@ -24,15 +27,15 @@ const App = () => {
         <form>
           <div className="from-group">
             <label htmlFor="formEventTitle">タイトル</label>
-            <input className="form-control" id="formEventTitle" value={title} onChange={e => {setTitle(e.target.value)}} />
+            <input className="form-control" id="formEventTitle" value={title} onChange={e => setTitle(e.target.value)} />
           </div>
 
           <div className="from-group">
             <label htmlFor="formEventBody">ボディ</label>
-            <textarea className="form-control" id="formEventBody" onChange={e => {setBody(e.target.value)}} />
+            <textarea className="form-control" id="formEventBody" onChange={e => setBody(e.target.value)} />
           </div>
 
-          <button className="btn btn-primary" value={body} onClick={(e)=>{addEvent(e)}}>イベントを作成する</button>
+          <button className="btn btn-primary" onClick={addEvent}>イベントを作成する</button>
           <button className="btn btn-danger">全てのイベントを削除する</button>
         </form>
 
