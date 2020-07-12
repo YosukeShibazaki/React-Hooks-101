@@ -1,12 +1,14 @@
 import React,{useState, useReducer} from 'react';
 import reducer from '../reducers'; // jsファイルまで指定しなくてもimportができる
 //import './App.css';
+import Event from './Event'
 
 const App = () => {
   const [state,dispatch] = useReducer(reducer,[]); // reducerの定義する。dispatchにはactionのtypeを渡す。useReducerの第一引数にはimportしたreducerを、第二引数にはstateの初期値を渡す。
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
+  // イベントを作成。テーブルに追加する処理。useReducerを使用している。
   const addEvent = e => {
     e.preventDefault();
     dispatch({
@@ -20,8 +22,6 @@ const App = () => {
     setBody('');
     console.log({state});
   }
-
-
 
   return (
     <> {/* React.Fragmentの略 */}
@@ -52,7 +52,10 @@ const App = () => {
               <th></th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            {/* App.jsの値をEvent.jsに渡す必要がある。 */}
+            {state.map((event,index) => <Event key={index} event={event} dispatch={dispatch}/>)}
+          </tbody>
         </table>
       </div>
     </>
