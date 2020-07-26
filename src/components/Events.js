@@ -23,7 +23,7 @@ const Events = () => {
         </thead>
         <tbody>
           {/* App.jsの値をEvent.jsに渡す必要がある。 */}
-          {state.map((event,index) => <Event key={index} event={event} />)}
+          {state.events.map((event,index) => <Event key={index} event={event} />)}
         </tbody>
       </table>
     </>

@@ -7,7 +7,10 @@ import AppContext from '../contexts/AppContext';
 // createContextのProviderでretrun内をラッピングする。valueを指定する。(Provider側のコーディング)
 
 const App = () => {
-  const [state,dispatch] = useReducer(reducer,[]); // reducerの定義する。dispatchにはactionのtypeを渡
+  const initialState = {
+    events:[]
+  }
+  const [state,dispatch] = useReducer(reducer,initialState); // reducerの定義する。dispatchにはactionのtypeを渡
 
   return (
     <AppContext.Provider value={{ state,dispatch }}>
