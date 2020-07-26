@@ -1,9 +1,17 @@
-import React from 'react';
+import React,{ useContext } from 'react';
 import Event from './Event';
+import AppContext from '../contexts/AppContext';
 
 const Events = ({state,dispatch}) => {
+  // useContextの引数にcreateContextの関数を入力。
+  const value = useContext(AppContext);
   return (
     <>
+      {/* createContextは古いやり方。かつHooksでもっと簡単に書ける。
+        <AppContext.Consumer>
+        { value => {return <div>{value}</div>}}
+      </AppContext.Consumer>*/}
+      <div>{value}</div>
       <h4>イベント一覧</h4>
       <table className="table table-hover">
         <thead>
